@@ -605,13 +605,28 @@
 								<span class='checkmark'></span>
 							</label>
 						</div>
-						<div class='readable-background padding margin-bottom'>
-							<h5 class='input-description margin-bottom'>Show collector info</h5>
-							<label class='checkbox-container input margin-bottom'>Show collector info (uncheck to hide)
-								<input id='enableCollectorInfo' type='checkbox' onchange='enableCollectorInfo();'>
-								<span class='checkmark'></span>
-							</label>
-						</div>
+							<div class='readable-background padding margin-bottom'>
+								<h5 class='input-description margin-bottom'>Show collector info</h5>
+								<label class='checkbox-container input margin-bottom'>Show collector info (uncheck to hide)
+									<input id='enableCollectorInfo' type='checkbox' onchange='enableCollectorInfo();'>
+									<span class='checkmark'></span>
+								</label>
+								<details class='padding'>
+									<summary class='input-description margin-bottom'>Filtered text visibility</summary>
+									<label class='checkbox-container input margin-bottom'>Hide "NOT FOR SALE"
+										<input id='hideNotForSale' type='checkbox' onchange='setCollectorInfoFilter();'>
+										<span class='checkmark'></span>
+									</label>
+									<label class='checkbox-container input margin-bottom'>Hide Wizards copyright line
+										<input id='hideWizardsCopyright' type='checkbox' onchange='setCollectorInfoFilter();'>
+										<span class='checkmark'></span>
+									</label>
+									<label class='checkbox-container input margin-bottom'>Hide CardConjurer.com
+										<input id='hideCardConjurer' type='checkbox' onchange='setCollectorInfoFilter();'>
+										<span class='checkmark'></span>
+									</label>
+								</details>
+							</div>
 
 						<div class='readable-background padding margin-bottom'>
 							<h5 class='padding input-description'>Serial Number (leave both blank to hide)</h5>
