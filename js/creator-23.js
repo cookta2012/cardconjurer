@@ -4504,7 +4504,7 @@ async function bottomInfoEdited() {
 
 	if (document.querySelector('#enableCollectorInfo').checked) {
 		for (var textObject of Object.entries(card.bottomInfo)) {
-			if (!shouldRenderFilteredBottomInfoText(textObject[1].text)) {
+			if (!shouldRenderFilteredBottomInfoText(textObject[0], textObject[1].text)) {
 				continue;
 			} else {
 				textObject[1].name = textObject[0];
@@ -4516,16 +4516,15 @@ async function bottomInfoEdited() {
 
 	drawCard();
 }
-function shouldRenderFilteredBottomInfoText(text) {
-	const filterRules = [
-		{key: 'hideNotForSale', values: ["NOT FOR SALE"]},
-		{key: 'hideWizardsCopyright', values: ["Wizards of the Coast"]},
-		{key: 'hideCardConjurer', values: ["CardConjurer.com", "cardconjurer.com"]}
-	];
-	for (const rule of filterRules) {
-		if (localStorage.getItem(rule.key) == 'true' && rule.values.some(v => text.includes(v))) {
-			return false;
-		}
+function shouldRenderFilteredBottomInfoText(textObjectName, text) {
+	if (localStorage.getItem('hideNotForSale') == 'true' && (textObjectName == 'bottomLeft' || text.includes("NOT FOR SALE"))) {
+		return false;
+	}
+	if (localStorage.getItem('hideWizardsCopyright') == 'true' && ['wizards', 'copyright'].includes(textObjectName)) {
+		return false;
+	}
+	if (localStorage.getItem('hideCardConjurer') == 'true' && (textObjectName == 'bottomRight' || ["CardConjurer.com", "cardconjurer.com"].some(v => text.includes(v)))) {
+		return false;
 	}
 	return true;
 }
