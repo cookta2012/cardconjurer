@@ -587,10 +587,13 @@
 								<input id='info-language' type='text' class='input' oninput='bottomInfoEdited();' placeholder='Language' value='EN'>
 								<input id='info-artist' type='text' class='input' oninput='artistEdited(this.value);' placeholder='Artist'>
 							</div>
-							<div class='padding input-grid'>
-								<input id='info-year' type='number' class='input' oninput='bottomInfoEdited();' placeholder='0' value='1993'>
+								<div class='padding input-grid'>
+									<input id='info-year' type='number' class='input' oninput='bottomInfoEdited();' placeholder='0' value='1993'>
+								</div>
+								<div class='padding input-grid'>
+									<textarea id='info-wotc' class='input' oninput='bottomInfoEdited();' placeholder='™ & © 2026 Wizards of the Coast' rows='2'></textarea>
+								</div>
 							</div>
-						</div>
 						<div class='readable-background padding margin-bottom'>
 							<h5 class='input-description margin-bottom'>Enable importing collector information</h5>
 							<label class='checkbox-container input margin-bottom'>Enable imports
@@ -605,13 +608,28 @@
 								<span class='checkmark'></span>
 							</label>
 						</div>
-						<div class='readable-background padding margin-bottom'>
-							<h5 class='input-description margin-bottom'>Show collector info</h5>
-							<label class='checkbox-container input margin-bottom'>Show collector info (uncheck to hide)
-								<input id='enableCollectorInfo' type='checkbox' onchange='enableCollectorInfo();'>
-								<span class='checkmark'></span>
-							</label>
-						</div>
+							<div class='readable-background padding margin-bottom'>
+								<h5 class='input-description margin-bottom'>Show collector info</h5>
+								<label class='checkbox-container input margin-bottom'>Show collector info (uncheck to hide)
+									<input id='enableCollectorInfo' type='checkbox' onchange='enableCollectorInfo();'>
+									<span class='checkmark'></span>
+								</label>
+								<details class='padding'>
+									<summary class='input-description margin-bottom'>Filtered text visibility</summary>
+									<label class='checkbox-container input margin-bottom'>Hide "NOT FOR SALE"
+										<input id='hideNotForSale' type='checkbox' onchange='setCollectorInfoFilter();'>
+										<span class='checkmark'></span>
+									</label>
+									<label class='checkbox-container input margin-bottom'>Hide Wizards copyright line
+										<input id='hideWizardsCopyright' type='checkbox' onchange='setCollectorInfoFilter();'>
+										<span class='checkmark'></span>
+									</label>
+									<label class='checkbox-container input margin-bottom'>Hide CardConjurer.com
+										<input id='hideCardConjurer' type='checkbox' onchange='setCollectorInfoFilter();'>
+										<span class='checkmark'></span>
+									</label>
+								</details>
+							</div>
 
 						<div class='readable-background padding margin-bottom'>
 							<h5 class='padding input-description'>Serial Number (leave both blank to hide)</h5>
