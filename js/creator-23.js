@@ -111,6 +111,8 @@ var savedTextContents = {};
 var date = new Date();
 card.infoYear = date.getFullYear();
 document.querySelector("#info-year").value = card.infoYear;
+card.infoCopyright = '\u2122 & \u00a9 ' + card.infoYear + ' Wizards of the Coast';
+document.querySelector('#info-copyright').value = card.infoCopyright;
 //to avoid rerunning special scripts (planeswalker, saga, etc...)
 
 var loadedVersions = [];
@@ -158,7 +160,7 @@ async function setBottomInfoStyle() {
 				topLeft: {text:'{elemidinfo-rarity} {kerning3}{elemidinfo-number}{kerning0}', x:0.0647, y:0.9377, width:0.8707, height:0.0171, oneLine:true, font:'gothammedium', size:0.0171, color:card.bottomInfoColor, outlineWidth:0.003},
 				note: {text:'{loadx}{elemidinfo-note}', x:0.0647, y:0.9377, width:0.8707, height:0.0171, oneLine:true, font:'gothammedium', size:0.0171, color:card.bottomInfoColor, outlineWidth:0.003},
 				bottomLeft: {text:'NOT FOR SALE', x:0.0647, y:0.9719, width:0.8707, height:0.0143, oneLine:true, font:'gothammedium', size:0.0143, color:card.bottomInfoColor, outlineWidth:0.003},
-				wizards: {name:'wizards', text:'{ptshift0,0.0172}\u2122 & \u00a9 1993-{elemidinfo-year} Wizards of the Coast, Inc.', x:0.0647, y:0.9377, width:0.8707, height:0.0167, oneLine:true, font:'mplantin', size:0.0162, color:card.bottomInfoColor, align:'right', outlineWidth:0.003},
+				wizards: {name:'wizards', text:'{ptshift0,0.0172}{elemidinfo-copyright}', x:0.0647, y:0.9377, width:0.8707, height:0.0167, oneLine:true, font:'mplantin', size:0.0162, color:card.bottomInfoColor, align:'right', outlineWidth:0.003},
 				bottomRight: {text:'{ptshift0,0.0172}CardConjurer.com', x:0.0647, y:0.9548, width:0.8707, height:0.0143, oneLine:true, font:'mplantin', size:0.0143, color:card.bottomInfoColor, align:'right', outlineWidth:0.003}
 			});
 		} else {
@@ -168,7 +170,7 @@ async function setBottomInfoStyle() {
 				note: {text:'{loadx2}{elemidinfo-note}', x:0.0647, y:0.9377, width:0.8707, height:0.0171, oneLine:true, font:'gothammedium', size:0.0171, color:card.bottomInfoColor, outlineWidth:0.003},
 				rarity: {text:'{loadx}{elemidinfo-rarity}', x:0.0647, y:0.9377, width:0.8707, height:0.0171, oneLine:true, font:'gothammedium', size:0.0171, color:card.bottomInfoColor, outlineWidth:0.003},
 				bottomLeft: {text:'NOT FOR SALE', x:0.0647, y:0.9719, width:0.8707, height:0.0143, oneLine:true, font:'gothammedium', size:0.0143, color:card.bottomInfoColor, outlineWidth:0.003},
-				wizards: {name:'wizards', text:'{ptshift0,0.0172}\u2122 & \u00a9 1993-{elemidinfo-year} Wizards of the Coast, Inc.', x:0.0647, y:0.9377, width:0.8707, height:0.0167, oneLine:true, font:'mplantin', size:0.0162, color:card.bottomInfoColor, align:'right', outlineWidth:0.003},
+				wizards: {name:'wizards', text:'{ptshift0,0.0172}{elemidinfo-copyright}', x:0.0647, y:0.9377, width:0.8707, height:0.0167, oneLine:true, font:'mplantin', size:0.0162, color:card.bottomInfoColor, align:'right', outlineWidth:0.003},
 				bottomRight: {text:'{ptshift0,0.0172}CardConjurer.com', x:0.0647, y:0.9548, width:0.8707, height:0.0143, oneLine:true, font:'mplantin', size:0.0143, color:card.bottomInfoColor, align:'right', outlineWidth:0.003}
 			});
 		}
@@ -3425,9 +3427,6 @@ function writeText(textObject, targetContext) {
 		rawText = params.get('copyright'); //so people using CC for custom card games without WotC's IP can customize their copyright info
 		if (rawText == 'none') { rawText = ''; }
 	}
-	if ((textObject.name == 'wizards' || textObject.name == 'copyright') && rawText.includes('Wizards of the Coast') && !rawText.includes('Wizards of the Coast, Inc.')) {
-		rawText = rawText.replace('Wizards of the Coast', 'Wizards of the Coast, Inc.');
-	}
 	if (rawText.toLowerCase().includes('{cardname}') || rawText.toLowerCase().includes('~')) {
 		rawText = rawText.replace(/{cardname}|~/ig, getInlineCardName());
 	}
@@ -4500,6 +4499,7 @@ async function bottomInfoEdited() {
 	card.infoLanguage = document.querySelector('#info-language').value;
 	card.infoArtist = document.querySelector('#info-artist').value;
 	card.infoYear = document.querySelector('#info-year').value;
+	card.infoCopyright = document.querySelector('#info-copyright').value;
 	card.infoNote = document.querySelector('#info-note').value;
 
 	if (document.querySelector('#enableCollectorInfo').checked) {
